@@ -8,10 +8,10 @@ rustPlatform.buildRustPackage (final: {
 
   src = ./.;
 
-  cargoHash = "sha256-64a0gb6hdVTc2znASRsmUX3zVd4Ff/1VVdUZO0mzjxU=";
+  cargoHash = "sha256-/H2HVPFd4s3q9icVFKU78Y/4V6Y7BjEihWFcC63PC04=";
 
   meta = {
-    description = "Convert temperature values between fahrenheit and celsius.";
+    description = "Print the lyrics to The Twelve Days of Christmas in sequence";
     homepage = "https://github.com/fuguesoft/twlvi";
     license = lib.licenses.gpl3;
     maintainers = with lib.maintainers; [ fuguesoft ];
