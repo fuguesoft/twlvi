@@ -22,11 +22,25 @@ const LYRICS: [&str; 12] = [
 
 fn test_tuple_index_type() {
   //what is the type of a tuple index?
-  let tup: (&str, &str, &str) = (
+  let tup: (&str, &str, &str, &str, &str, &str, &str, &str, &str, &str, &str, &str) = (
   "a partridge in a pear tree!",
   "two turtle doves",
   "three french hens",
+  "four calling birds",
+  "",
+  "six geese a-laying",
+  "seven swans a-swimming",
+  "eight maids a-milking",
+  "nine ladies dancing",
+  "ten lords a-leaping",
+  "eleven pipers piping",
+  "twelve drummers drumming",
   );
+
+  let jason: u32 = 2;
+  let (one, two, three, four, five, six, seven, eight, nine, ten, eleven, twelve) = tup; 
+  let [one, two, three, four, five, six, seven, eight, nine, ten, eleven, twelve] = &LYRICS; 
+
 
 }
 
@@ -61,14 +75,11 @@ fn go_again() {
 
 fn on_the(n: u32) {
   let suffix;
-  if n == 1 {
-    suffix = "st";
-  } else if n == 2 {
-    suffix = "nd";
-  } else if n == 3 {
-    suffix = "rd";
-  } else {
-    suffix = "th";
+  match n {
+    1 => suffix = "st",
+    2 => suffix = "nd",
+    3 => suffix = "rd",
+    _ => suffix = "th"
   }
   println!("On the {n}{suffix} day of Christmas, my true love gave to me");
   sleep_sec(2);
@@ -122,7 +133,7 @@ fn sleep_sec(t: u64) {
   assert!(now.elapsed() >= millis)
 }
 
-// lyrics function prototype
+// lyrics function chain idea
 fn first() {
   println!("a partridge in a pair tree!\n");
   sleep_sec(2);
