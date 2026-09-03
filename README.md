@@ -1,6 +1,6 @@
 # twlvi
 
-Convert temperature values from fahrenheit to celsius and vice versa.
+Print the lyrics to _The Twelve Days of Christmas_ in sequence
 
 ## Why?
 This was built to get some practice with concepts from chapters 1-3 of the rust book.
@@ -35,7 +35,7 @@ cargo run
 ```
 
 **Nix**
-1. Enable Nix Flakes ([See Above](##Install))
+1. Enable Nix Flakes ([See Below](##Install))
 2. Temporarily build and run without installing
 ```sh
 nix run github:fuguesoft/twlvi
