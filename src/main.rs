@@ -30,13 +30,15 @@ const FIVE_GOLDEN_RINGS: [&str; 3] = [
 ];
 
 fn main() {
-  // welcome
-  welcome();
-  // get user input and print lyrics
-  handle_input(get_user_input());
-  // sequence_lyrics(12, 0);
-  // ask to repeat
-  // go_again(get_user_input());
+  loop {
+    // welcome
+    welcome();
+    // get user input and print lyrics
+    handle_input(get_user_input());
+    // sequence_lyrics(12, 0);
+    // ask to repeat
+    go_again();
+  }
 }
 
 fn welcome() {
@@ -45,7 +47,7 @@ fn welcome() {
   // display welcome message
   println!("welcome to twlvi!");
   println!("please choose a number n where (0 < n < 13)");
-  println!("(f: no animation)");
+  println!("(f: print full lyrics and quit)");
   println!("(ctrl-c/q: quit)");
 }
 
@@ -58,6 +60,7 @@ fn push_all_stanzas() {
 
 // touch up when you learn enums
 fn handle_input(input: String) -> u32 {
+  clear_screen();
   loop {
     // println!("not really");
     // get stanzas to print
@@ -67,10 +70,9 @@ fn handle_input(input: String) -> u32 {
           true => ret,
           false => handle_input(get_user_input()),
           _ => {
-            handle_input(get_user_input());
+            // handle_input(get_user_input());
             return 0
           }
-
         }
       },
       Err(_) => {
@@ -80,7 +82,7 @@ fn handle_input(input: String) -> u32 {
           _ => (),
         }
         handle_input(get_user_input());
-        0
+        return 0
       },
     };
 
@@ -99,24 +101,35 @@ fn handle_input(input: String) -> u32 {
       "12" => sequence_lyrics(stanzas, 1),
       _ => (),
     }
+    return 0
   }
-  // currently, this is not hit
-  return 0
+}
+
+fn repeat_message() {
+  println!("Would you like to go again? (Y/n)");
 }
 
 // touch up when you learn enums
-fn go_again(input: String) {
+fn go_again() {
   loop {
-    println!("Would you like to go again?");
-    // let mut choice = get_user_input();
+    // println!("Top of go_again");
+    repeat_message();
+    let mut input = get_user_input();
 
-    match get_user_input().as_str().trim() {
-      "y" => return,
-      "" => return,
-      "n" => quit(),
+    match input.as_str().trim() {
+      "y" => {
+        return
+      },
+      "" => {
+        return
+      },
+      "n" => {
+        // why does the loop continue?
+        quit();
+      },
       _ => { 
         println!("choice invalid"); 
-        continue
+        go_again();
       },
     }
   }
@@ -196,7 +209,8 @@ fn sequence_lyrics(n: u32, sleep_time: u64) {
       _ => (),
     };
   };
-  return
+  // println!("tomato sandwich");
+  // return
 }
 
 ////////////////////////////
