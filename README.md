@@ -30,10 +30,16 @@ rm -r /path/to/twlvi
 ```
 
 **Nix**
+
+Exit the program and run the following command:
 ```sh
 nix-store --gc
 ```
 
+**NixOS**
+
+1. Revert [installation](##Install) step 2 & 3
+2. Repeat installation step 4
 ## Run without installing
 **Cargo**
 
@@ -103,4 +109,13 @@ home.nix
 home.packages = with pkgs; [
   inputs.twlvi.packages."${pkgs.stdenv.hostPlatform.system}".default
 ]
+```
+
+4. Rebuild
+```sh
+# nixos
+nixos-rebuild switch --flake /path/to/flake/#host
+
+# home-manager
+home-manager switch --flake /path/to/flake/#user
 ```
