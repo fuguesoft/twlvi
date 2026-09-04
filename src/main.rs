@@ -57,12 +57,22 @@ fn push_all_stanzas() {
 }
 
 // touch up when you learn enums
-fn handle_input(input: String) {
+fn handle_input(input: String) -> u32 {
   loop {
     // println!("not really");
     // get stanzas to print
     let mut stanzas = match input.trim().parse(){
-      Ok(ret) => ret,
+      Ok(ret) => {
+        match ret > 0 && ret < 13 {
+          true => ret,
+          false => handle_input(get_user_input()),
+          _ => {
+            handle_input(get_user_input());
+            return 0
+          }
+
+        }
+      },
       Err(_) => {
         handle_input(get_user_input());
         0
@@ -88,7 +98,7 @@ fn handle_input(input: String) {
     }
   }
   // currently, this is not hit
-  return
+  return 0
 }
 
 // touch up when you learn enums
