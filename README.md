@@ -16,11 +16,12 @@ It's rust so it should just work on any of the big three? There's some docs on
 Windows exceptions I ain't quite read yet...
 
 ## Usage
-Enter a number between 1 and 12 when prompted or enter `f` to print the full
+When prompted, enter a number between 1 and 12 or enter `f` to print the full
 sequence and exit.
 
 At the prompt, use `q` to quit.
-At any point during runtime use `ctrl-c` to exit.
+
+At any point during runtime, use `ctrl-c` to exit.
 
 ## Uninstall
 **Cargo**
