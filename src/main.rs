@@ -47,13 +47,13 @@ fn welcome() {
   // display welcome message
   println!("welcome to twlvi!");
   println!("please choose a number n where (0 < n < 13)");
-  println!("(f: print full lyrics and quit)");
-  println!("(ctrl-c/q: quit)");
+  println!("(f: print full lyrics and exit)");
+  println!("(q: quit)");
+  println!("(ctrl-c: SIGINT)");
 }
 
 fn push_all_stanzas() {
   // disable sleep for the stanza printing sequence
-  println!("pushing all stanzas!");
   sequence_lyrics(12, 0);
   quit();
 }
@@ -68,7 +68,10 @@ fn handle_input(input: String) -> u32 {
       Ok(ret) => {
         match ret > 0 && ret < 13 {
           true => ret,
-          false => handle_input(get_user_input()),
+          false => {
+            println!("Please enter a valid number between 1 and 12");
+            handle_input(get_user_input())
+          },
           _ => {
             // handle_input(get_user_input());
             return 0
@@ -124,7 +127,9 @@ fn go_again() {
         return
       },
       "n" => {
-        // why does the loop continue?
+        quit();
+      },
+      "q" => {
         quit();
       },
       _ => { 

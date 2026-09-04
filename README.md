@@ -3,7 +3,8 @@
 Print the lyrics to _The Twelve Days of Christmas_ in sequence
 
 ## Why?
-This was built to get some practice with concepts from chapters 1-3 of the rust book.
+This was built to get some practice with concepts from chapters 1-3 of the rust
+book.
 
 ## Prerequisites
 [Cargo](https://doc.rust-lang.org/cargo/getting-started/installation.html)
@@ -13,6 +14,13 @@ or
 ## Compatibility
 It's rust so it should just work on any of the big three? There's some docs on
 Windows exceptions I ain't quite read yet...
+
+## Usage
+Enter a number between 1 and 12 when prompted or enter `f` to print the full
+sequence and exit.
+
+At the prompt, use `q` to quit.
+At any point during runtime use `ctrl-c` to exit.
 
 ## Uninstall
 **Cargo**
@@ -27,6 +35,7 @@ nix-store --gc
 
 ## Run without installing
 **Cargo**
+
 Run the program from within the project root:
 ```sh
 git clone git@github.com/fuguesoft/twlvi
@@ -43,6 +52,7 @@ nix run github:fuguesoft/twlvi
 
 ## Install
 **Cargo**
+
 Download the repository:
 
 ```sh
