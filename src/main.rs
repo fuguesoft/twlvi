@@ -30,17 +30,13 @@ const FIVE_GOLDEN_RINGS: [&str; 3] = [
 ];
 
 fn main() {
-  // exp();
-  // quit();
-  loop {
-    // welcome
-    welcome();
-    // get user input and print lyrics
-    handle_input(get_user_input());
-    // sequence_lyrics(7, 1);
-    // ask to repeat
-    // go_again(get_user_input());
-  }
+  // welcome
+  welcome();
+  // get user input and print lyrics
+  handle_input(get_user_input());
+  // sequence_lyrics(12, 0);
+  // ask to repeat
+  // go_again(get_user_input());
 }
 
 fn welcome() {
@@ -54,15 +50,14 @@ fn welcome() {
 }
 
 fn push_all_stanzas() {
-  // disable sleep for the stanza printing loop
+  // disable sleep for the stanza printing sequence
   println!("pushing all stanzas!");
   sequence_lyrics(12, 0);
   quit();
-  return
 }
 
 // touch up when you learn enums
-fn handle_input(input: String) -> String {
+fn handle_input(input: String) {
   loop {
     // println!("not really");
     // get stanzas to print
@@ -92,6 +87,8 @@ fn handle_input(input: String) -> String {
       _ => (),
     }
   }
+  // currently, this is not hit
+  return
 }
 
 // touch up when you learn enums
@@ -112,7 +109,7 @@ fn go_again(input: String) {
   }
 }
 
-fn on_the(n: u32) {
+fn on_the(n: u32, sleep_time: u64) {
   let suffix;
   match n {
     1 => suffix = "st",
@@ -121,12 +118,15 @@ fn on_the(n: u32) {
     _ => suffix = "th"
   }
   println!("On the {n}{suffix} day of Christmas, my true love gave to me");
-  sleep_sec(Sec::Is(2));
+  sleep_sec(Sec::Is(sleep_time));
 }
 
-fn five(sleep_time: u64) {
+fn five(mut sleep_time: u64) {
   for i in (1..=3){
     println!("{}", FIVE_GOLDEN_RINGS[i - 1]);
+    if sleep_time == 1 {
+      sleep_time += 1
+    }
     sleep_sec(Sec::Is(sleep_time));
   }
 }
@@ -148,14 +148,13 @@ fn pluck_lyric_by_index(target: u32, sleep_time: u64) {
   let mut iter = target as usize;
   while iter > 0 {
     if iter == 5 {
-      five(1);
+      five(sleep_time);
       iter -= 1;
     }
     println!("{}", lyrics[iter - 1]);
-    sleep_sec(Sec::Is(1));
+    sleep_sec(Sec::Is(sleep_time));
     iter -= 1;
   }
-  return
 
   sleep_sec(Sec::Is(sleep_time));
 }
@@ -168,7 +167,7 @@ fn sequence_lyrics(n: u32, sleep_time: u64) {
     // print verse header
     println!("[Verse {i}]");
     // print "On The" for the day
-    on_the(i);
+    on_the(i, sleep_time);
     match i {
       1 => pluck_lyric_by_index(i, sleep_time),
       2 => pluck_lyric_by_index(i, sleep_time),
@@ -185,6 +184,7 @@ fn sequence_lyrics(n: u32, sleep_time: u64) {
       _ => (),
     };
   };
+  return
 }
 
 ////////////////////////////
@@ -336,7 +336,7 @@ fn twelfth() {
   eleventh();
 }
 
-fn old_func_delete_me(n: u32) {
+fn old_func_delete_me(n: u32, sleep_time: u64) {
   // print lyrics in sequence
   // 1
   // 2 1
@@ -346,7 +346,7 @@ fn old_func_delete_me(n: u32) {
     // print verse header
     println!("[Verse {i}]");
     // print "On The" for the day
-    on_the(i);
+    on_the(i, sleep_time);
     // print the corresponding gift from LYRICS
     // and subsequent gifts in decending order
     // we want to print from the array in reverse
