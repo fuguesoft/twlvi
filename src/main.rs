@@ -33,9 +33,8 @@ fn main() {
   loop {
     // welcome
     welcome();
-    // get user input and print lyrics
+    // get user input and sequence lyrics
     handle_input(get_user_input());
-    // sequence_lyrics(12, 0);
     // ask to repeat
     go_again();
   }
@@ -54,7 +53,7 @@ fn welcome() {
 
 fn push_all_stanzas() {
   // disable sleep for the stanza printing sequence
-  sequence_lyrics(12, 0);
+  sequence_stanzas_by_second(12, 0);
   quit();
 }
 
@@ -62,7 +61,6 @@ fn push_all_stanzas() {
 fn handle_input(input: String) -> u32 {
   clear_screen();
   loop {
-    // println!("not really");
     // get stanzas to print
     let mut stanzas = match input.trim().parse(){
       Ok(ret) => {
@@ -73,7 +71,6 @@ fn handle_input(input: String) -> u32 {
             handle_input(get_user_input())
           },
           _ => {
-            // handle_input(get_user_input());
             return 0
           }
         }
@@ -90,33 +87,32 @@ fn handle_input(input: String) -> u32 {
     };
 
     match input.trim() {
-      "1" => sequence_lyrics(stanzas, 1),
-      "2" => sequence_lyrics(stanzas, 1),
-      "3" => sequence_lyrics(stanzas, 1),
-      "4" => sequence_lyrics(stanzas, 1),
-      "5" => sequence_lyrics(stanzas, 1),
-      "6" => sequence_lyrics(stanzas, 1),
-      "7" => sequence_lyrics(stanzas, 1),
-      "8" => sequence_lyrics(stanzas, 1),
-      "9" => sequence_lyrics(stanzas, 1),
-      "10" => sequence_lyrics(stanzas, 1),
-      "11" => sequence_lyrics(stanzas, 1),
-      "12" => sequence_lyrics(stanzas, 1),
+      "1" => sequence_stanzas_by_second(stanzas, 1),
+      "2" => sequence_stanzas_by_second(stanzas, 1),
+      "3" => sequence_stanzas_by_second(stanzas, 1),
+      "4" => sequence_stanzas_by_second(stanzas, 1),
+      "5" => sequence_stanzas_by_second(stanzas, 1),
+      "6" => sequence_stanzas_by_second(stanzas, 1),
+      "7" => sequence_stanzas_by_second(stanzas, 1),
+      "8" => sequence_stanzas_by_second(stanzas, 1),
+      "9" => sequence_stanzas_by_second(stanzas, 1),
+      "10" => sequence_stanzas_by_second(stanzas, 1),
+      "11" => sequence_stanzas_by_second(stanzas, 1),
+      "12" => sequence_stanzas_by_second(stanzas, 1),
       _ => (),
     }
     return 0
   }
 }
 
-fn repeat_message() {
+fn ask_to_repeat() {
   println!("Would you like to go again? (Y/n)");
 }
 
 // touch up when you learn enums
 fn go_again() {
   loop {
-    // println!("Top of go_again");
-    repeat_message();
+    ask_to_repeat();
     let mut input = get_user_input();
 
     match input.as_str().trim() {
@@ -189,9 +185,9 @@ fn pluck_lyric_by_index(target: u32, sleep_time: u64) {
   sleep_sec(Sec::Is(sleep_time));
 }
 
-// arrange the corresponding gift from LYRICS
-// and subsequent gifts in decending order
-fn sequence_lyrics(n: u32, sleep_time: u64) {
+// sequence stanzas line by line starting with the current day onwards in 
+// descending order
+fn sequence_stanzas_by_second(n: u32, sleep_time: u64) {
 
   for i in (1..=n){
     // print verse header
