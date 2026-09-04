@@ -10,7 +10,7 @@ use std::process;
 // But now I'm doing that...
 const LYRICS: [&str; 12] = [
   "a partridge in a pear tree!\n",
-  "two turtle doves and a",
+  "two turtle doves and",
   "three french hens",
   "four calling birds",
   "",
@@ -23,6 +23,12 @@ const LYRICS: [&str; 12] = [
   "twelve drummers drumming",
 ];
 
+const FIVE_GOLDEN_RINGS: [&str; 3] = [
+  "FIVE!",
+  "GOLDEN!",
+  "RINGS!",
+];
+
 fn main() {
   // exp();
   // quit();
@@ -33,7 +39,7 @@ fn main() {
     handle_input(get_user_input());
     // sequence_lyrics(7, 1);
     // ask to repeat
-    go_again(get_user_input());
+    // go_again(get_user_input());
   }
 }
 
@@ -47,7 +53,6 @@ fn welcome() {
   println!("(ctrl-c/q: quit)");
 }
 
-
 fn push_all_stanzas() {
   // disable sleep for the stanza printing loop
   println!("pushing all stanzas!");
@@ -56,6 +61,7 @@ fn push_all_stanzas() {
   return
 }
 
+// touch up when you learn enums
 fn handle_input(input: String) -> String {
   loop {
     // println!("not really");
@@ -81,7 +87,7 @@ fn handle_input(input: String) -> String {
       "10" => sequence_lyrics(stanzas, 1),
       "11" => sequence_lyrics(stanzas, 1),
       "12" => sequence_lyrics(stanzas, 1),
-      "f" => sequence_lyrics(stanzas, 0),
+      "f" => push_all_stanzas(),
       "q" => quit(),
       _ => (),
     }
@@ -118,13 +124,11 @@ fn on_the(n: u32) {
   sleep_sec(Sec::Is(2));
 }
 
-fn five() {
-  println!("FIVE!");
-  sleep_sec(Sec::Is(2));
-  println!("GOLDEN!");
-  sleep_sec(Sec::Is(2));
-  println!("RINGS!");
-  sleep_sec(Sec::Is(2));
+fn five(sleep_time: u64) {
+  for i in (1..=3){
+    println!("{}", FIVE_GOLDEN_RINGS[i - 1]);
+    sleep_sec(Sec::Is(sleep_time));
+  }
 }
 
 // print lyric starting from target and ending at the front of the array
@@ -144,7 +148,7 @@ fn pluck_lyric_by_index(target: u32, sleep_time: u64) {
   let mut iter = target as usize;
   while iter > 0 {
     if iter == 5 {
-      five();
+      five(1);
       iter -= 1;
     }
     println!("{}", lyrics[iter - 1]);
