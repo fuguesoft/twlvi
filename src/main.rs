@@ -74,6 +74,11 @@ fn handle_input(input: String) -> u32 {
         }
       },
       Err(_) => {
+        match input.trim() {
+          "f" => push_all_stanzas(),
+          "q" => quit(),
+          _ => (),
+        }
         handle_input(get_user_input());
         0
       },
@@ -92,8 +97,6 @@ fn handle_input(input: String) -> u32 {
       "10" => sequence_lyrics(stanzas, 1),
       "11" => sequence_lyrics(stanzas, 1),
       "12" => sequence_lyrics(stanzas, 1),
-      "f" => push_all_stanzas(),
-      "q" => quit(),
       _ => (),
     }
   }
@@ -165,7 +168,6 @@ fn pluck_lyric_by_index(target: u32, sleep_time: u64) {
     sleep_sec(Sec::Is(sleep_time));
     iter -= 1;
   }
-
   sleep_sec(Sec::Is(sleep_time));
 }
 
